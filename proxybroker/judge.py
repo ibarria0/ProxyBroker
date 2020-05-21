@@ -19,7 +19,7 @@ class Judge:
         'SMTP': asyncio.Event(),
     }
 
-    def __init__(self, url, timeout=8, verify_ssl=False, loop=None):
+    def __init__(self, url, timeout=8, verify_ssl=False, loop=None, simple=False):
         self.url = url
         self.scheme = urlparse(url).scheme.upper()
         self.host = urlparse(url).netloc
@@ -91,7 +91,14 @@ class Judge:
 
         page = page.lower()
 
-        if resp.status == 200 and real_ext_ip in page and rv in page:
+        if resp.status == 200 and simple:
+            self.marks['via'] = 1
+            self.marks['proxy'] = 1
+            self.is_working = True
+            self.available[self.scheme].append(self)
+            self.ev[self.scheme].set()
+            log.debug('%s is verified' % self)
+        elif resp.status == 200 and real_ext_ip in page and rv in page:
             self.marks['via'] = page.count('via')
             self.marks['proxy'] = page.count('proxy')
             self.is_working = True
