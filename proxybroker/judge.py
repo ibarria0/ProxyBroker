@@ -87,6 +87,7 @@ class Judge:
             aiohttp.ClientOSError,
             aiohttp.ClientResponseError,
             aiohttp.ServerDisconnectedError,
+            Exception,
         ) as e:
             log.debug('%s is failed. Error: %r;' % (self, e))
             return
