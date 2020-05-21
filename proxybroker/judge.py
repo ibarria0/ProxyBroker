@@ -20,6 +20,7 @@ class Judge:
     }
 
     def __init__(self, url, timeout=8, verify_ssl=False, loop=None, simple=False):
+        self.allowed_codes = [200, 301, 302]
         self.simple = simple
         self.url = url
         self.scheme = urlparse(url).scheme.upper()
@@ -92,7 +93,7 @@ class Judge:
 
         page = page.lower()
 
-        if resp.status == 200 and self.simple:
+        if resp.status in self.allowed_codes and self.simple:
             self.marks['via'] = 1
             self.marks['proxy'] = 1
             self.is_working = True
