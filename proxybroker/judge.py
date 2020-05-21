@@ -20,6 +20,7 @@ class Judge:
     }
 
     def __init__(self, url, timeout=8, verify_ssl=False, loop=None, simple=False):
+        self.simple = simple
         self.url = url
         self.scheme = urlparse(url).scheme.upper()
         self.host = urlparse(url).netloc
