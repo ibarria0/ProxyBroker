@@ -703,6 +703,22 @@ class ProxyProvider(Provider):
 
 PROVIDERS = [
     Provider(
+        url='https://api.proxyscrape.com/?request=getproxies&proxytype=http',
+        proto=('HTTP', 'CONNECT:80'),
+    ),
+    Provider(
+        url='https://api.proxyscrape.com/?request=getproxies&proxytype=https',
+        proto=('HTTPS', 'CONNECT:80'),
+    ),
+    Provider(
+        url='https://api.proxyscrape.com/?request=getproxies&proxytype=socks5',
+        proto=('SOCKS5'),
+    ),
+    Provider(
+        url='https://api.proxyscrape.com/?request=getproxies&proxytype=socks4',
+        proto=('SOCKS4'),
+    ),
+    Provider(
         url='http://www.proxylists.net/',
         proto=('HTTP', 'CONNECT:80', 'HTTPS', 'CONNECT:25'),
     ),  # 49
