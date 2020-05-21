@@ -91,7 +91,7 @@ class Judge:
 
         page = page.lower()
 
-        if resp.status == 200 and simple:
+        if resp.status == 200 and self.simple:
             self.marks['via'] = 1
             self.marks['proxy'] = 1
             self.is_working = True
